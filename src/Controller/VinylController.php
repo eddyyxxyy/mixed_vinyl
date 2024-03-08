@@ -18,6 +18,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\u;
@@ -31,7 +32,7 @@ use function Symfony\Component\String\u;
  * @license  MIT https://mit-license.org/
  * @link     http://github.com/eddyyxxyy/mixed_vinyl
  */
-class VinylController
+class VinylController extends AbstractController
 {
     /**
      * Renders the homepage
@@ -41,7 +42,22 @@ class VinylController
     #[Route("/", "home")]
     public function homepage(): Response
     {
-        return new Response("Title: PB and Jams");
+        $tracks = [
+            ["song" => "Gangsta's Paradise", "artist" => "Coolio"],
+            ["song" => "Waterfalls", "artist" => "TLC"],
+            ["song" => "Creep", "artist" => "Radiohead"],
+            ["song" => "Kiss from a Rose", "artist" => "Seal"],
+            ["song" => "On Bended Knee", "artist" => "Boyz II Men"],
+            ["song" => "Fantasy", "artist" => "Mariah Carey"],
+        ];
+
+        return $this->render(
+            "vinyl/homepage.html.twig",
+            [
+                'title' => 'PB and Jams',
+                'tracks' => $tracks,
+            ]
+        );
     }
 
     /**
